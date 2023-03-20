@@ -1,0 +1,40 @@
+<%= form_with(model: folder) do |form| %>
+  <% if folder.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(folder.errors.count, "error") %> prohibited this folder from being saved:</h2>
+
+      <ul>
+        <% folder.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :folderName, style: "display: block" %>
+    <%= form.text_field :folderName %>
+  </div>
+
+  <div>
+    <%= form.label :user_id, style: "display: block" %>
+    <%= form.text_field :user_id %>
+  </div>
+
+  <div>
+  <div class="mb-6">
+    <%= form.label :feature_image, class: "label" %>
+    <div class="dropzone dropzone-default dz-clickable" data-controller="dropzone" data-dropzone-max-file-size="" data-dropzone-max-files="10">
+    <%= form.file_field :feature_image, direct_upload: true, data: { target: 'dropzone.input' } %>
+    <div class="dropzone-msg dz-message needsclick text-gray-600">
+      <h3 class="dropzone-msg-title">Drag here to upload or click here to browse</h3>
+      <span class="dropzone-msg-desc text-sm">2 MB file size maximum. Allowed file types png, jpg.</span>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div>
+    <%= form.submit data: {turbo: false}  %>
+  </div>
+<% end %>
